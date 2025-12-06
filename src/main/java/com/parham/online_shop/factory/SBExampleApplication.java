@@ -6,13 +6,19 @@ import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.domain.EntityScan;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
+import org.springframework.context.annotation.Configuration;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 
 @Slf4j
-@SpringBootApplication(scanBasePackages = {"com.parham.online_shop"})
-@ComponentScan({"com.parham.online_shop.controller"})
+@SpringBootApplication(scanBasePackages = {
+        "com.parham.online_shop.controller",
+        "com.parham.online_shop.service",
+        "com.parham.online_shop.repository"
+})
+@ComponentScan({"com.parham.online_shop.controller" , "com.parham.online_shop.service"})
 @EntityScan("com.parham.online_shop.entity")
 @EnableJpaRepositories("com.parham.online_shop.repository")
+@Configuration
 public class SBExampleApplication {
     public static void main(String[] args) {
         SpringApplication.run(SBExampleApplication.class, args);
