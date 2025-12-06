@@ -10,6 +10,6 @@ import org.springframework.context.annotation.Configuration;
 public class WebConfig {
     @Bean
     public WebServerFactoryCustomizer<ConfigurableServletWebServerFactory> webServerFactoryCustomizer(){
-        return (factory)-> factory.setContextPath("/shop");
+        return (factory)-> factory.setContextPath("/online-shop");
     }
 }
