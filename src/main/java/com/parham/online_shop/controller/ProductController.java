@@ -30,6 +30,18 @@ public class ProductController {
         }
     }
 
+    @GetMapping
+    public ResponseEntity<Product> getProductById(@RequestParam Long id) {
+        try {
+            Product product = productService.getProductById(id);
+            return ResponseEntity.ok(product);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
     @PostMapping
     public ResponseEntity<Product> addProduct(@RequestBody Product product) {
         try {
@@ -40,4 +52,28 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
+
+    @DeleteMapping
+    public ResponseEntity<String> deleteProduct(@RequestParam Long id) {
+        try {
+            productService.deleteProduct(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
+
+    @PutMapping
+    public ResponseEntity<String> updateProduct(@RequestBody Product product) {
+        try {
+            productService.updateProduct(product);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
+        }
+    }
+
 }
