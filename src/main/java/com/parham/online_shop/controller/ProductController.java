@@ -30,7 +30,7 @@ public class ProductController {
         }
     }
 
-    @GetMapping
+    @GetMapping("/id")
     public ResponseEntity<Product> getProductById(@RequestParam Long id) {
         try {
             Product product = productService.getProductById(id);
@@ -75,5 +75,4 @@ public class ProductController {
             return ResponseEntity.status(HttpStatus.NOT_FOUND).build();
         }
     }
-
 }
