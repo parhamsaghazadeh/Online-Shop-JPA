@@ -13,9 +13,11 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 @SpringBootApplication(scanBasePackages = {
         "com.parham.online_shop.controller",
         "com.parham.online_shop.service",
-        "com.parham.online_shop.repository"
+        "com.parham.online_shop.repository",
+        "com.parham.online_shop.model"
 })
-@ComponentScan({"com.parham.online_shop.controller" , "com.parham.online_shop.service" , "com.parham.online_shop.repository"})
+@ComponentScan({"com.parham.online_shop.controller" , "com.parham.online_shop.service" , "com.parham.online_shop.repository"
+, "com.parham.online_shop.model"})
 @EntityScan("com.parham.online_shop.entity")
 @EnableJpaRepositories("com.parham.online_shop.repository")
 @Configuration
