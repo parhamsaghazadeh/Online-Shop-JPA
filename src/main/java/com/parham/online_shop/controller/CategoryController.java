@@ -22,33 +22,43 @@ public class CategoryController {
         try {
             List<Category> categories = categoryService.getAllCategory();
             return ResponseEntity.ok(categories);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @GetMapping("/ID")
+    @GetMapping("/all")
     public ResponseEntity<Category> getCategoryById(Long id) {
         try {
             Category category = categoryService.getCategoryById(id);
             return ResponseEntity.ok(category);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
+
+    @PostMapping
+    public ResponseEntity<Category> addCategory(@RequestBody Category category) {
+        try {
+            Category categoryAdded = categoryService.addCategory(category);
+            return ResponseEntity.ok(categoryAdded);
+        } catch (Exception e) {
+            log.error(e.getMessage());
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
     @PutMapping
-    public ResponseEntity<Category> updateCategory(Category category) {
+    public ResponseEntity<Category> updateCategory(@RequestBody Category category) {
         try {
             categoryService.updateCategory(category);
             return ResponseEntity.ok(category);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -60,8 +70,7 @@ public class CategoryController {
         try {
             categoryService.deleteCategory(id);
             return ResponseEntity.ok(id + " deleted successfully");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
