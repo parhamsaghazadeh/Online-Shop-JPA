@@ -1,6 +1,8 @@
 package com.parham.online_shop.controller;
 
 import com.parham.online_shop.entity.Product;
+import com.parham.online_shop.model.Converter;
+import com.parham.online_shop.model.ProductModel;
 import com.parham.online_shop.service.ProductService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,7 +10,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/test")
@@ -16,13 +20,19 @@ import java.util.List;
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private Converter converter;
 
 
-    @GetMapping("/all")
-    public ResponseEntity<List<Product>> getProduct() {
+    @GetMapping
+    public ResponseEntity<List<ProductModel>> getProduct() {
         try {
             List<Product> products = productService.getAllProducts();
-            return ResponseEntity.ok(products);
+            List<ProductModel> productModels = products.stream()
+                    .map(converter::toModelProduct).
+                    peek(System.out::println)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(productModels);
         } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
@@ -30,11 +40,12 @@ public class ProductController {
         }
     }
 
-    @GetMapping("/id")
-    public ResponseEntity<Product> getProductById(@RequestParam Long id) {
+    @GetMapping("/all")
+    public ResponseEntity<ProductModel> getProductById(@RequestParam long id) {
         try {
             Product product = productService.getProductById(id);
-            return ResponseEntity.ok(product);
+            ProductModel productModels = converter.toModelProduct(product);
+            return ResponseEntity.ok(productModels);
         } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
