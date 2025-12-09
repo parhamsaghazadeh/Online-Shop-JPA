@@ -12,10 +12,6 @@ import java.util.Date;
 @Entity
 @Table(name = "product")
 @Data
-@JsonIdentityInfo(
-        generator = ObjectIdGenerators.PropertyGenerator.class,
-        property = "id"
-)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
