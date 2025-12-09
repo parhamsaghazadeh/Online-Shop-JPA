@@ -1,9 +1,12 @@
 package com.parham.online_shop.model;
 
+import java.util.List;
+
 public class CategoryModel {
     private Long id;
     private String code;
     private String title;
+    private List<ProductModel> products;
 
     public Long getId() {
         return id;
@@ -27,5 +30,13 @@ public class CategoryModel {
 
     public void setTitle(String title) {
         this.title = title;
+    }
+
+    public List<ProductModel> getProducts() {
+        return products;
+    }
+
+    public void setProducts(List<ProductModel> products) {
+        this.products = products;
     }
 }

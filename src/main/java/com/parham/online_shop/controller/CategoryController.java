@@ -1,6 +1,8 @@
 package com.parham.online_shop.controller;
 
 import com.parham.online_shop.entity.Category;
+import com.parham.online_shop.model.CategoryModel;
+import com.parham.online_shop.model.Converter;
 import com.parham.online_shop.service.CategoryService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @RestController
 @RequestMapping("/category")
@@ -17,11 +20,17 @@ public class CategoryController {
     @Autowired
     private CategoryService categoryService;
 
+    @Autowired
+    private Converter converter;
+
     @GetMapping
-    public ResponseEntity<List<Category>> getAllCategories() {
+    public ResponseEntity<List<CategoryModel>> getAllCategories() {
         try {
             List<Category> categories = categoryService.getAllCategory();
-            return ResponseEntity.ok(categories);
+            List<CategoryModel> categoryModels = categories.stream()
+                    .map(converter::toModelCategory)
+                    .collect(Collectors.toList());
+            return ResponseEntity.ok(categoryModels);
         } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);

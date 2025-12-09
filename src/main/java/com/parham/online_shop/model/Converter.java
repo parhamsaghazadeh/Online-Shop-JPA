@@ -2,11 +2,13 @@ package com.parham.online_shop.model;
 
 import com.parham.online_shop.entity.Category;
 import com.parham.online_shop.entity.Product;
-import org.springframework.context.annotation.Bean;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.util.List;
+import java.util.stream.Collectors;
+
 @Component
 public class Converter {
     private static final DecimalFormat df = new DecimalFormat("#,##0.00");
@@ -33,11 +35,14 @@ public class Converter {
         return productModel;
     }
 
-    public CategoryModel toModelProduct(Category category) {
+    public CategoryModel toModelCategory(Category category) {
         CategoryModel categoryModel = new CategoryModel();
         categoryModel.setId(category.getId());
         categoryModel.setTitle(category.getTitle());
         categoryModel.setCode(category.getCode());
+        List<ProductModel> productModels = category.getProducts()
+                .stream().map(this::toModelProduct).collect(Collectors.toList());
+        categoryModel.setProducts(productModels);
         return categoryModel;
     }
 }
