@@ -1,5 +1,7 @@
 package com.parham.online_shop.entity;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,6 +12,10 @@ import java.util.List;
         @UniqueConstraint(name = "UK_CATEGORY_NAME", columnNames = {"title"}),
         @UniqueConstraint(name = "UK_CATEGORY_CODE", columnNames = {"code"})
 })
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 @Data
 public class Category {
     @Id

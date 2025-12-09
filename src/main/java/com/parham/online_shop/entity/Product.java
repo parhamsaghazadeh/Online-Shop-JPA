@@ -1,6 +1,8 @@
 package com.parham.online_shop.entity;
 
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -10,6 +12,10 @@ import java.util.Date;
 @Entity
 @Table(name = "product")
 @Data
+@JsonIdentityInfo(
+        generator = ObjectIdGenerators.PropertyGenerator.class,
+        property = "id"
+)
 public class Product {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
