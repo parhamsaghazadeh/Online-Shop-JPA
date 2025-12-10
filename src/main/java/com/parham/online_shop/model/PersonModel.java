@@ -9,7 +9,7 @@ public class PersonModel {
     private long id;
     private String name;
     private String lastName;
-    private Date birthday;
+    private String birthday;
     private long userId;
     private Gender genderId;
     private Role roleId;
@@ -38,11 +38,11 @@ public class PersonModel {
         this.lastName = lastName;
     }
 
-    public Date getBirthday() {
+    public String getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(Date birthday) {
+    public void setBirthday(String birthday) {
         this.birthday = birthday;
     }
 
