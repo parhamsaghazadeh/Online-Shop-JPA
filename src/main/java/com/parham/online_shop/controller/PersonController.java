@@ -14,7 +14,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @RestController
-@RequestMapping("Person")
+@RequestMapping("/person")
 @Slf4j
 public class PersonController {
     @Autowired
@@ -31,22 +31,20 @@ public class PersonController {
                     .map(converter::toModelPerson)
                     .collect(Collectors.toList());
             return ResponseEntity.ok(personModels);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
     }
 
-    @GetMapping
-    public ResponseEntity<PersonModel> getPersonById(@RequestParam Long id) {
+    @GetMapping("/id")
+    public ResponseEntity<PersonModel> getPersonById(@RequestParam long id) {
         try {
             Person person = personService.getPersonById(id);
             PersonModel personModel = converter.toModelPerson(person);
             return ResponseEntity.ok(personModel);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -54,12 +52,11 @@ public class PersonController {
     }
 
     @PutMapping
-    public ResponseEntity<PersonModel> updatePerson(@RequestBody PersonModel personModel) {
+    public ResponseEntity<PersonModel> updatePerson(@RequestBody Person person) {
         try {
-            Person person = personService.getPersonById(personModel.getId());
-            return ResponseEntity.ok(converter.toModelPerson(person));
-        }
-        catch (Exception e) {
+            Person personSave = personService.updatePerson(person);
+            return ResponseEntity.ok(converter.toModelPerson(personSave));
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -67,25 +64,25 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<PersonModel> addPerson(@RequestBody Person person) {
+    public ResponseEntity<Person> addPerson(@RequestBody Person person) {
         try {
-            Person personSave = personService.addPerson(person);
-            PersonModel personModel = converter.toModelPerson(personSave);
-            return ResponseEntity.ok(personModel);
+            Person personAdded = personService.addPerson(person);
+            return ResponseEntity.ok(personAdded);
         }
         catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+
     }
+
     @DeleteMapping
     public ResponseEntity<String> deletePersonById(@RequestParam Long id) {
         try {
             personService.deletePerson(id);
             return ResponseEntity.ok("Person deleted successfully");
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

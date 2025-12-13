@@ -1,9 +1,11 @@
 package com.parham.online_shop.entity;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 @Entity
 @Table(name = "gender")
+@Data
 public class Gender {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

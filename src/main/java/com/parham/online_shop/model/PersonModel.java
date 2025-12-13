@@ -2,6 +2,7 @@ package com.parham.online_shop.model;
 
 import com.parham.online_shop.entity.Gender;
 import com.parham.online_shop.entity.Role;
+import com.parham.online_shop.entity.User;
 
 import java.util.Date;
 
@@ -10,7 +11,7 @@ public class PersonModel {
     private String name;
     private String lastName;
     private String birthday;
-    private long userId;
+    private User userId;
     private Gender genderId;
     private Role roleId;
 
@@ -46,11 +47,11 @@ public class PersonModel {
         this.birthday = birthday;
     }
 
-    public long getUserId() {
+    public User getUserId() {
         return userId;
     }
 
-    public void setUserId(long userId) {
+    public void setUserId(User userId) {
         this.userId = userId;
     }
 

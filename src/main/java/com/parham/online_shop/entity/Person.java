@@ -19,8 +19,9 @@ public class Person {
     @Column(name = "birthday", length = 50, nullable = false)
     @Temporal(TemporalType.DATE)
     private Date birthday;
-    @Column(name = "user_id",length = 50, nullable = false)
-    private long userId;
+    @ManyToOne
+    @JoinColumn(name = "user_id" , nullable = false , foreignKey = @ForeignKey(name = "FK_person_user"))
+    private User userId;
     @ManyToOne
     @JoinColumn(name = "gender_id", foreignKey = @ForeignKey(name = "Fk_Person_gender"))
     private Gender genderId;
