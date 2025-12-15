@@ -1,8 +1,6 @@
 package com.parham.online_shop.model;
 
-import com.parham.online_shop.entity.Category;
-import com.parham.online_shop.entity.Person;
-import com.parham.online_shop.entity.Product;
+import com.parham.online_shop.entity.*;
 import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
@@ -61,4 +59,22 @@ public class Converter {
         return personModel;
     }
 
+    public OrderModel toModelOrder(Orders orders) {
+        OrderModel orderModel = new OrderModel();
+        orderModel.setId(orders.getId());
+        orderModel.setPersonId(orders.getPerson().getId());
+        orderModel.setPaymentDate(formatter.format(orders.getPaymentDate()));
+        orderModel.setPaymentMethod(orders.getPaymentMethod());
+        return orderModel;
+    }
+
+    public OrderItemModel toModelOrderItem(OrderItem orderItem) {
+        OrderItemModel orderItemModel = new OrderItemModel();
+        orderItemModel.setId(orderItem.getId());
+        orderItemModel.setOrderId(orderItem.getOrders().getId());
+        orderItemModel.setProductId(orderItem.getProduct().getId());
+        orderItemModel.setQuantity(orderItem.getQuantity());
+        orderItemModel.setPrice(orderItem.getPrice().toString());
+        return orderItemModel;
+    }
 }
