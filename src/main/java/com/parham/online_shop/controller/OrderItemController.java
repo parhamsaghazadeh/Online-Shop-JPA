@@ -31,8 +31,7 @@ public class OrderItemController {
                     .map(converter::toModelOrderItem)
                     .collect(Collectors.toList());
             return ResponseEntity.ok(orderItemModels);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -45,8 +44,7 @@ public class OrderItemController {
             OrderItem orderItem = orderItemService.getOrderItemById(id);
             OrderItemModel orderItemModel = converter.toModelOrderItem(orderItem);
             return ResponseEntity.ok(orderItemModel);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -59,8 +57,7 @@ public class OrderItemController {
             OrderItem updatedOrderItem = orderItemService.updateOrderItem(orderItem);
             OrderItemModel orderItemModel = converter.toModelOrderItem(updatedOrderItem);
             return ResponseEntity.ok(updatedOrderItem);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -72,8 +69,7 @@ public class OrderItemController {
         try {
             OrderItem addOrderItem = orderItemService.addOrderItem(orderItem);
             return ResponseEntity.status(HttpStatus.CREATED).body(addOrderItem);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
@@ -86,8 +82,7 @@ public class OrderItemController {
         try {
             orderItemService.deleteOrderItemById(id);
             return ResponseEntity.status(HttpStatus.NO_CONTENT).build();
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();

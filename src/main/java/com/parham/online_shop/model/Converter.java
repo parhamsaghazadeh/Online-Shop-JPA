@@ -5,13 +5,16 @@ import org.springframework.stereotype.Component;
 
 import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 import java.util.List;
 import java.util.stream.Collectors;
 
 @Component
 public class Converter {
     private static final DecimalFormat df = new DecimalFormat("#,##0.00");
-    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+    SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+    DateTimeFormatter formatterTime =  DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss");
 
 
     public ProductModel toModelProduct(Product product) {
@@ -63,7 +66,10 @@ public class Converter {
         OrderModel orderModel = new OrderModel();
         orderModel.setId(orders.getId());
         orderModel.setPersonId(orders.getPerson().getId());
-        orderModel.setPaymentDate(formatter.format(orders.getPaymentDate()));
+        LocalDateTime paymentDate = orders.getPaymentDate();
+        if (paymentDate != null) {
+            orderModel.setPaymentDate(formatterTime.format(paymentDate));
+        }
         orderModel.setPaymentMethod(orders.getPaymentMethod());
         return orderModel;
     }

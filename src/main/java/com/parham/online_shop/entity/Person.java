@@ -20,7 +20,7 @@ public class Person {
     @Temporal(TemporalType.DATE)
     private Date birthday;
     @ManyToOne
-    @JoinColumn(name = "user_id" , nullable = false , foreignKey = @ForeignKey(name = "FK_person_user"))
+    @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_person_user"))
     private User userId;
     @ManyToOne
     @JoinColumn(name = "gender_id", foreignKey = @ForeignKey(name = "Fk_Person_gender"))

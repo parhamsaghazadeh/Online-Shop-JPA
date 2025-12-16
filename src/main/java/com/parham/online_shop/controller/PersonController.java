@@ -68,8 +68,7 @@ public class PersonController {
         try {
             Person personAdded = personService.addPerson(person);
             return ResponseEntity.ok(personAdded);
-        }
-        catch (Exception e) {
+        } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
