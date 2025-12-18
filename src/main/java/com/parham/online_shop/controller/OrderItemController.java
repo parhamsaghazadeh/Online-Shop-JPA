@@ -52,11 +52,11 @@ public class OrderItemController {
     }
 
     @PutMapping
-    public ResponseEntity<OrderItem> updateOrderItem(OrderItem orderItem) {
+    public ResponseEntity<OrderItemModel> updateOrderItem(@RequestBody OrderItem orderItem) {
         try {
             OrderItem updatedOrderItem = orderItemService.updateOrderItem(orderItem);
             OrderItemModel orderItemModel = converter.toModelOrderItem(updatedOrderItem);
-            return ResponseEntity.ok(updatedOrderItem);
+            return ResponseEntity.ok(orderItemModel);
         } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);

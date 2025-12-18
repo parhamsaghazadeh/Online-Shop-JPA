@@ -1,5 +1,4 @@
 package com.parham.online_shop.entity;
-
 import jakarta.persistence.*;
 import lombok.Data;
 

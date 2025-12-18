@@ -63,13 +63,15 @@ public class OrderController {
         }
     }
 
-    @PutMapping
+    @PutMapping("/update")
     public ResponseEntity<OrderModel> updateOrder(@RequestBody Orders orders) {
         try {
             Orders updateOrders = orderService.updateOrders(orders);
-            return ResponseEntity.ok(converter.toModelOrder(updateOrders));
+            OrderModel orderModel = converter.toModelOrder(updateOrders);
+            return ResponseEntity.ok(orderModel);
         } catch (Exception e) {
             log.error(e.getMessage());
+            System.out.println("ID = " + orders.getId());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
@@ -79,7 +81,7 @@ public class OrderController {
     public ResponseEntity<String> deleteOrderById(Long id) {
         try {
             orderService.deleteOrders(id);
-            return ResponseEntity.ok().build();
+            return ResponseEntity.ok().body("Order deleted");
         } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
