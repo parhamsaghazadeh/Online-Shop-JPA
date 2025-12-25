@@ -16,7 +16,6 @@ public interface DisplayRepository  extends JpaRepository<DisplayOrder, Long> {
                 p.lastName          AS person_lastname,
                 p.birthday       AS person_birthday,
                 c.title             AS category_title,
-                po.name             AS product_name,
                 po.brand            AS product_brand,
                 po.model            AS product_model,
                 po.madeIn          AS product_made_in,
