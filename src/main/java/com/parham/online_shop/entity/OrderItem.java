@@ -19,7 +19,7 @@ public class OrderItem {
     @JoinColumn(name = "product_id", nullable = false, foreignKey = @ForeignKey(name = "FK_order_product"))
     private Product product;
     @Column(name = "quantity", nullable = false, length = 50)
-    private long quantity;
+    private Long quantity;
     @Column(name = "price", nullable = false, length = 50)
     private BigDecimal price;
 }

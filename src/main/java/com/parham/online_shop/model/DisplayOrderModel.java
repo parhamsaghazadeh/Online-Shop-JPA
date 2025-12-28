@@ -1,30 +1,35 @@
 package com.parham.online_shop.model;
 
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.Date;
+
 public class DisplayOrderModel {
     //person
     private String personName ;
     private String lastName;
-    private String birthday;
+    private Date birthday;
     //category
     private String title;
     //product
     private String brand;
     private String model;
-    private String yareOfMenuFacture;
+    private String madeIn;
+    private Date yareOfMenuFacture;
     private String name;
-    private String price;
+    private BigDecimal price;
     //order
-    private String paymentDate;
     private String paymentMethod;
+    private LocalDateTime paymentDate;
     //orderItem
-    private String quantity;
-    private String priceOrder;
+    private Long quantity;
+    private BigDecimal priceOrder;
     //productRegistration
-    private String registrationDate;
+    private LocalDateTime registrationDate;
     //location
     private String titleLocation;
     private String type;
-    private String openTime;
+    private LocalDateTime openTime;
 
     public String getPersonName() {
         return personName;
@@ -42,11 +47,11 @@ public class DisplayOrderModel {
         this.lastName = lastName;
     }
 
-    public String getBirthday() {
+    public Date getBirthday() {
         return birthday;
     }
 
-    public void setBirthday(String birthday) {
+    public void setBirthday(Date birthday) {
         this.birthday = birthday;
     }
 
@@ -74,11 +79,19 @@ public class DisplayOrderModel {
         this.model = model;
     }
 
-    public String getYareOfMenuFacture() {
+    public String getMadeIn() {
+        return madeIn;
+    }
+
+    public void setMadeIn(String madeIn) {
+        this.madeIn = madeIn;
+    }
+
+    public Date getYareOfMenuFacture() {
         return yareOfMenuFacture;
     }
 
-    public void setYareOfMenuFacture(String yareOfMenuFacture) {
+    public void setYareOfMenuFacture(Date yareOfMenuFacture) {
         this.yareOfMenuFacture = yareOfMenuFacture;
     }
 
@@ -90,20 +103,12 @@ public class DisplayOrderModel {
         this.name = name;
     }
 
-    public String getPrice() {
+    public BigDecimal getPrice() {
         return price;
     }
 
-    public void setPrice(String price) {
+    public void setPrice(BigDecimal price) {
         this.price = price;
-    }
-
-    public String getPaymentDate() {
-        return paymentDate;
-    }
-
-    public void setPaymentDate(String paymentDate) {
-        this.paymentDate = paymentDate;
     }
 
     public String getPaymentMethod() {
@@ -114,27 +119,35 @@ public class DisplayOrderModel {
         this.paymentMethod = paymentMethod;
     }
 
-    public String getQuantity() {
+    public LocalDateTime getPaymentDate() {
+        return paymentDate;
+    }
+
+    public void setPaymentDate(LocalDateTime paymentDate) {
+        this.paymentDate = paymentDate;
+    }
+
+    public Long getQuantity() {
         return quantity;
     }
 
-    public void setQuantity(String quantity) {
+    public void setQuantity(Long quantity) {
         this.quantity = quantity;
     }
 
-    public String getPriceOrder() {
+    public BigDecimal getPriceOrder() {
         return priceOrder;
     }
 
-    public void setPriceOrder(String priceOrder) {
+    public void setPriceOrder(BigDecimal priceOrder) {
         this.priceOrder = priceOrder;
     }
 
-    public String getRegistrationDate() {
+    public LocalDateTime getRegistrationDate() {
         return registrationDate;
     }
 
-    public void setRegistrationDate(String registrationDate) {
+    public void setRegistrationDate(LocalDateTime registrationDate) {
         this.registrationDate = registrationDate;
     }
 
@@ -154,11 +167,11 @@ public class DisplayOrderModel {
         this.type = type;
     }
 
-    public String getOpenTime() {
+    public LocalDateTime getOpenTime() {
         return openTime;
     }
 
-    public void setOpenTime(String openTime) {
+    public void setOpenTime(LocalDateTime openTime) {
         this.openTime = openTime;
     }
 }

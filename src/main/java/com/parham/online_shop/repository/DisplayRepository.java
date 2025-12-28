@@ -11,8 +11,9 @@ import java.util.Optional;
 
 @Repository
 public interface DisplayRepository  extends JpaRepository<DisplayOrder, Long> {
-    @Query("""
-            SELECT p.name              AS person_name,
+    @Query("""       
+  SELECT new com.parham.online_shop.model.DisplayOrderModel(
+                p.name              AS person_name,
                 p.lastName          AS person_lastname,
                 p.birthday       AS person_birthday,
                 c.title             AS category_title,
@@ -30,16 +31,15 @@ public interface DisplayRepository  extends JpaRepository<DisplayOrder, Long> {
                 l.title             AS location_title,
                 l.type              AS location_type,
                 l.openTime         AS location_open_time
+            )
             FROM OrderItem orr
             JOIN orr.product po
             JOIN po.category c
             JOIN orr.orders o
             JOIN o.person p
-            JOIN DisplayOrder d ON d.orderId = o
-            JOIN d.locationId l
-            JOIN ProductRegistration pr
-                 ON pr.product = po AND pr.person = p
-            
-            """)
+            LEFT JOIN DisplayOrder d ON d.orderId = o
+            LEFT JOIN d.locationId l
+            LEFT JOIN ProductRegistration pr
+                              ON pr.product = po AND pr.person = p""")
     List<DisplayOrderModel> findByPersonName();
 }
