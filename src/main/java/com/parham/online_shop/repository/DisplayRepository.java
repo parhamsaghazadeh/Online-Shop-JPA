@@ -3,6 +3,7 @@ package com.parham.online_shop.repository;
 import com.parham.online_shop.entity.DisplayOrder;
 import com.parham.online_shop.model.DisplayOrderModel;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.stereotype.Repository;
 
@@ -11,35 +12,36 @@ import java.util.Optional;
 
 @Repository
 public interface DisplayRepository  extends JpaRepository<DisplayOrder, Long> {
+    @Modifying
     @Query("""       
-  SELECT new com.parham.online_shop.model.DisplayOrderModel(
-                p.name              AS person_name,
-                p.lastName          AS person_lastname,
-                p.birthday       AS person_birthday,
-                c.title             AS category_title,
-                po.brand            AS product_brand,
-                po.model            AS product_model,
-                po.madeIn          AS product_made_in,
-                po.yareOfMenuFacture AS product_year,
-                po.name           AS product_design,
-                po.price            AS product_price,
-                o.paymentMethod    AS order_payment_method,
-                o.paymentDate      AS order_payment_date,
-                orr.quantity        AS order_quantity,
-                orr.price           AS order_price,
-                pr.registrationDate AS product_registration_date,
-                l.title             AS location_title,
-                l.type              AS location_type,
-                l.openTime         AS location_open_time
-            )
-            FROM OrderItem orr
-            JOIN orr.product po
-            JOIN po.category c
-            JOIN orr.orders o
-            JOIN o.person p
-            LEFT JOIN DisplayOrder d ON d.orderId = o
-            LEFT JOIN d.locationId l
-            LEFT JOIN ProductRegistration pr
-                              ON pr.product = po AND pr.person = p""")
-    List<DisplayOrderModel> findByPersonName();
+SELECT new com.parham.online_shop.model.DisplayOrderModel(
+    p.name,
+    p.lastName,
+    p.birthday,
+    c.title,
+    po.brand,
+    po.model,
+    po.madeIn,
+    po.yareOfMenuFacture,
+    po.name,
+    po.price,
+    o.paymentMethod,
+    o.paymentDate,
+    orr.quantity,
+    orr.price,
+    pr.registrationDate,
+    l.title,
+    l.type,
+    l.openTime
+)
+FROM OrderItem orr
+JOIN orr.product po
+JOIN po.category c
+JOIN orr.orders o
+JOIN o.person p
+JOIN DisplayOrder d ON d.orderId = o
+JOIN d.locationId l
+JOIN ProductRegistration pr ON pr.product = po AND pr.person = p
+""")
+    List<DisplayOrderModel> findAllDisplayOrders();
 }
