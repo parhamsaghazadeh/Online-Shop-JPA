@@ -19,6 +19,8 @@ public class DisplayService {
     }
 
     public List<DisplayOrderModel> getAll() {
-        return displayRepository.findByPersonName();
+        List<DisplayOrderModel> list = displayRepository.findAllDisplayOrders();
+        System.out.println("SIZE = " + list.size());
+        return list;
     }
 }
