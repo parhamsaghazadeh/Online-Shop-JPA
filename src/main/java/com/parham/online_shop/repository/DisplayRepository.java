@@ -39,9 +39,9 @@ JOIN orr.product po
 JOIN po.category c
 JOIN orr.orders o
 JOIN o.person p
-JOIN DisplayOrder d ON d.orderId = o
-JOIN d.locationId l
-JOIN ProductRegistration pr ON pr.product = po AND pr.person = p
+left JOIN DisplayOrder d ON d.orderId = o
+left JOIN d.locationId l
+left JOIN ProductRegistration pr ON pr.product = po AND pr.person = p
 """)
     List<DisplayOrderModel> findAllDisplayOrders();
 }
