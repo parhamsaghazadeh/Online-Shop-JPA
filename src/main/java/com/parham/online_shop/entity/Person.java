@@ -1,8 +1,10 @@
 package com.parham.online_shop.entity;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.Order;
 import lombok.Data;
 
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Table(name = "person")
@@ -27,5 +29,6 @@ public class Person {
     @ManyToOne
     @JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_Person_Role"))
     private Role roleId;
-
+    @OneToMany(mappedBy = "person")
+    private List<Orders> orders;
 }

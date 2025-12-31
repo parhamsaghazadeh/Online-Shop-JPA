@@ -1,10 +1,12 @@
 package com.parham.online_shop.model;
 
 import com.parham.online_shop.entity.Gender;
+import com.parham.online_shop.entity.Orders;
 import com.parham.online_shop.entity.Role;
 import com.parham.online_shop.entity.User;
 
 import java.util.Date;
+import java.util.List;
 
 public class PersonModel {
     private long id;
@@ -14,6 +16,7 @@ public class PersonModel {
     private User userId;
     private Gender genderId;
     private Role roleId;
+    private List<OrderModel> ordersList;
 
     public long getId() {
         return id;
@@ -69,6 +72,14 @@ public class PersonModel {
 
     public void setRoleId(Role roleId) {
         this.roleId = roleId;
+    }
+
+    public List<OrderModel> getOrdersList() {
+        return ordersList;
+    }
+
+    public void setOrdersList(List<OrderModel> ordersList) {
+        this.ordersList = ordersList;
     }
 }
 
