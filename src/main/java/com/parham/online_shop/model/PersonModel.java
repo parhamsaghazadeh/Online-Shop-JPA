@@ -1,9 +1,6 @@
 package com.parham.online_shop.model;
 
-import com.parham.online_shop.entity.Gender;
-import com.parham.online_shop.entity.Orders;
-import com.parham.online_shop.entity.Role;
-import com.parham.online_shop.entity.User;
+import com.parham.online_shop.entity.*;
 
 import java.util.Date;
 import java.util.List;
@@ -17,6 +14,7 @@ public class PersonModel {
     private Gender genderId;
     private Role roleId;
     private List<OrderModel> ordersList;
+    private List<ProductRegisterModel> productRegisterModels;
 
     public long getId() {
         return id;
@@ -80,6 +78,14 @@ public class PersonModel {
 
     public void setOrdersList(List<OrderModel> ordersList) {
         this.ordersList = ordersList;
+    }
+
+    public List<ProductRegisterModel> getProductRegisterModels() {
+        return productRegisterModels;
+    }
+
+    public void setProductRegisterModels(List<ProductRegisterModel> productRegisterModels) {
+        this.productRegisterModels = productRegisterModels;
     }
 }
 
