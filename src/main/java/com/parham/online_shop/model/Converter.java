@@ -62,6 +62,9 @@ public class Converter {
         List<OrderModel> orderModels = person.getOrders()
                 .stream().map(this::toModelOrder).collect(Collectors.toList());
         personModel.setOrdersList(orderModels);
+        List<ProductRegisterModel> productRegisterModels = person.getProductRegistrations()
+                .stream().map(this::toModelProductRegister).collect(Collectors.toList());
+        personModel.setProductRegisterModels(productRegisterModels);
         return personModel;
     }
 
@@ -74,6 +77,9 @@ public class Converter {
             orderModel.setPaymentDate(formatterTime.format(paymentDate));
         }
         orderModel.setPaymentMethod(orders.getPaymentMethod());
+        List<OrderItemModel> orderItemModels = orders.getOrderItems()
+                .stream().map(this::toModelOrderItem).collect(Collectors.toList());
+        orderModel.setOrderItems(orderItemModels);
         return orderModel;
     }
 
@@ -85,5 +91,14 @@ public class Converter {
         orderItemModel.setQuantity(orderItem.getQuantity());
         orderItemModel.setPrice(orderItem.getPrice().toString());
         return orderItemModel;
+    }
+
+    public ProductRegisterModel toModelProductRegister(ProductRegistration productRegistration) {
+        ProductRegisterModel productRegisterModel = new ProductRegisterModel();
+        productRegisterModel.setId(productRegistration.getId());
+        productRegisterModel.setPersonId(productRegistration.getPerson().getId());
+        productRegisterModel.setProductId(productRegistration.getProduct().getId());
+        productRegisterModel.setRegistrationDate(productRegistration.getRegistrationDate());
+        return productRegisterModel;
     }
 }
