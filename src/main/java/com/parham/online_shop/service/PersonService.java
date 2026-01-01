@@ -1,6 +1,8 @@
 package com.parham.online_shop.service;
 
 import com.parham.online_shop.entity.Person;
+import com.parham.online_shop.model.OrderByPersonModel;
+import com.parham.online_shop.model.PersonModel;
 import com.parham.online_shop.repository.PersonRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -34,5 +36,10 @@ public class PersonService {
 
     public Person getPersonById(long id) {
         return personRepository.findById(id).orElse(null);
+    }
+
+    public List<OrderByPersonModel> orderPerson() {
+        List<OrderByPersonModel> orderByPersonModels = personRepository.findAllPerson();
+        return orderByPersonModels;
     }
 }
