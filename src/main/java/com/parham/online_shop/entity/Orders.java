@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Table(name = "orders")
@@ -19,4 +20,6 @@ public class Orders {
     private String paymentMethod;
     @Column(name = "payment_date",nullable = false)
     private LocalDateTime paymentDate;
+    @OneToMany(mappedBy = "orders")
+    private List<OrderItem> orderItems;
 }
