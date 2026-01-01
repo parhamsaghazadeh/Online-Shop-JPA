@@ -31,4 +31,6 @@ public class Person {
     private Role roleId;
     @OneToMany(mappedBy = "person")
     private List<Orders> orders;
+    @OneToMany(mappedBy = "person")
+    private List<ProductRegistration> productRegistrations;
 }
