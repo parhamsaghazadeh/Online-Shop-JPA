@@ -2,6 +2,7 @@ package com.parham.online_shop.controller;
 
 import com.parham.online_shop.entity.Person;
 import com.parham.online_shop.model.Converter;
+import com.parham.online_shop.model.OrderByPersonModel;
 import com.parham.online_shop.model.PersonModel;
 import com.parham.online_shop.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
@@ -45,6 +46,18 @@ public class PersonController {
             PersonModel personModel = converter.toModelPerson(person);
             return ResponseEntity.ok(personModel);
         } catch (Exception e) {
+            log.error(e.getMessage());
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/orderPerson")
+    public ResponseEntity<List<OrderByPersonModel>> getPersonByOrder() {
+        try {
+            List<OrderByPersonModel> personOrderList = personService.orderPerson();
+            return ResponseEntity.ok(personOrderList);
+        }catch (Exception e){
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
