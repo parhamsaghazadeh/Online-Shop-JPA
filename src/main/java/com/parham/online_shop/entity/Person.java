@@ -8,6 +8,9 @@ import java.util.List;
 
 @Entity
 @Table(name = "person")
+@SecondaryTable(
+        name = "person_contact" , pkJoinColumns = @PrimaryKeyJoinColumn(name = "person_id")
+)
 @Data
 public class Person {
     @Id
@@ -29,6 +32,10 @@ public class Person {
     @ManyToOne
     @JoinColumn(name = "role_id", foreignKey = @ForeignKey(name = "FK_Person_Role"))
     private Role roleId;
+    @Column(table = "person_contact" , name = "phone")
+    private String phone;
+    @Column(table = "person_contact" , name = "age")
+    private Long age;
     @OneToMany(mappedBy = "person")
     private List<Orders> orders;
     @OneToMany(mappedBy = "person")
