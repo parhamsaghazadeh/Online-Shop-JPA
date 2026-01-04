@@ -59,6 +59,9 @@ public class Converter {
         personModel.setUserId(person.getUserId());
         personModel.setGenderId(person.getGenderId());
         personModel.setRoleId(person.getRoleId());
+        personModel.setPersonId(person.getId());
+        personModel.setPhone(person.getPhone());
+        personModel.setAge(person.getAge());
         List<OrderModel> orderModels = person.getOrders()
                 .stream().map(this::toModelOrder).collect(Collectors.toList());
         personModel.setOrdersList(orderModels);
