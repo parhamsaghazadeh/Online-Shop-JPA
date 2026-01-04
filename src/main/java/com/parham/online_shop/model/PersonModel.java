@@ -10,6 +10,9 @@ public class PersonModel {
     private String name;
     private String lastName;
     private String birthday;
+    private long personId;
+    private String phone;
+    private Long age;
     private User userId;
     private Gender genderId;
     private Role roleId;
@@ -86,6 +89,30 @@ public class PersonModel {
 
     public void setProductRegisterModels(List<ProductRegisterModel> productRegisterModels) {
         this.productRegisterModels = productRegisterModels;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
+    }
+
+    public Long getAge() {
+        return age;
+    }
+
+    public void setAge(Long age) {
+        this.age = age;
+    }
+
+    public long getPersonId() {
+        return personId;
+    }
+
+    public void setPersonId(long personId) {
+        this.personId = personId;
     }
 }
 
