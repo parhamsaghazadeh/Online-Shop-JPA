@@ -7,6 +7,8 @@ public class ProductModel {
     private String model;
     private String madeIn;
     private String year_of_manufacture;
+    private String serialNumber;
+    private String isOriginal;
     private String price;
     private Long category_id;
 
@@ -56,6 +58,22 @@ public class ProductModel {
 
     public void setYear_of_manufacture(String year_of_manufacture) {
         this.year_of_manufacture = year_of_manufacture;
+    }
+
+    public String getSerialNumber() {
+        return serialNumber;
+    }
+
+    public void setSerialNumber(String serialNumber) {
+        this.serialNumber = serialNumber;
+    }
+
+    public String getIsOriginal() {
+        return isOriginal;
+    }
+
+    public void setIsOriginal(String isOriginal) {
+        this.isOriginal = isOriginal;
     }
 
     public String getPrice() {
