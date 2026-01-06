@@ -27,6 +27,11 @@ public class Converter {
         productModel.setModel(product.getModel());
         productModel.setMadeIn(product.getMadeIn());
         productModel.setPrice(df.format(product.getPrice()));
+        productModel.setSerialNumber(product.getSerialNumber());
+
+        if (product.getIsOriginal() != null){
+            productModel.setIsOriginal(product.getIsOriginal().toString());
+        }
 
         if (product.getYareOfMenuFacture() != null) {
             SimpleDateFormat sdf = new SimpleDateFormat("dd/MM/yyyy");
