@@ -11,6 +11,9 @@ import java.util.Date;
 
 @Entity
 @Table(name = "product")
+@SecondaryTable(
+        name = "product_identity" , pkJoinColumns = @PrimaryKeyJoinColumn(name = "product_id")
+)
 @Data
 public class Product {
     @Id
@@ -27,6 +30,10 @@ public class Product {
     @Column (name = "yare_of_menufacture",length = 50, nullable = false)
     @Temporal(TemporalType.DATE)
     private Date yareOfMenuFacture;
+    @Column(table = "product_identity" , name = "serial_number" ,unique = true)
+    private String serialNumber;
+    @Column(table = "product_identity" , name = "is_original")
+    private Boolean isOriginal;
     @Column (name = "price" , precision = 10, scale = 2, nullable = false )
     private BigDecimal price;
     @ManyToOne
