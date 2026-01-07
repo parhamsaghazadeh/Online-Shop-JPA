@@ -1,5 +1,7 @@
 package com.parham.online_shop.model;
 
+import com.parham.online_shop.entity.DisplayOrder;
+
 import java.util.List;
 
 public class OrderModel {
@@ -8,6 +10,7 @@ public class OrderModel {
     private String paymentMethod;
     private String paymentDate;
     public List<OrderItemModel> orderItems;
+    private List<DisplayOrderModel> displayOrderModels;
 
     public long getId() {
         return id;
@@ -47,5 +50,13 @@ public class OrderModel {
 
     public void setOrderItems(List<OrderItemModel> orderItems) {
         this.orderItems = orderItems;
+    }
+
+    public List<DisplayOrderModel> getDisplayOrderModels() {
+        return displayOrderModels;
+    }
+
+    public void setDisplayOrderModels(List<DisplayOrderModel> displayOrderModels) {
+        this.displayOrderModels = displayOrderModels;
     }
 }
