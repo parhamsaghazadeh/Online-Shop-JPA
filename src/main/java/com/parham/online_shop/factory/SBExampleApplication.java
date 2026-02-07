@@ -17,7 +17,7 @@ import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
         "com.parham.online_shop.model"
 })
 @ComponentScan({"com.parham.online_shop.controller" , "com.parham.online_shop.service" , "com.parham.online_shop.repository"
-, "com.parham.online_shop.model"})
+, "com.parham.online_shop.model" , "com.parham.online_shop.factory"})
 @EntityScan("com.parham.online_shop.entity")
 @EnableJpaRepositories("com.parham.online_shop.repository")
 @Configuration
