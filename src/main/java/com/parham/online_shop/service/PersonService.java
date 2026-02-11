@@ -1,5 +1,7 @@
 package com.parham.online_shop.service;
 
+import com.parham.online_shop.entity.OrderItem;
+import com.parham.online_shop.entity.Orders;
 import com.parham.online_shop.entity.Person;
 import com.parham.online_shop.model.OrderByPersonModel;
 import com.parham.online_shop.model.PersonModel;
@@ -13,15 +15,27 @@ import java.util.List;
 public class PersonService {
 
     private PersonRepository personRepository;
+
     @Autowired
     public PersonService(PersonRepository personRepository) {
         this.personRepository = personRepository;
     }
 
     public Person addPerson(Person person) {
+        if (person.getOrders() != null) {
+            for (Orders order : person.getOrders()) {
+                order.setPerson(person);
+
+                if (order.getOrderItems() != null) {
+                    for (OrderItem orderItem : order.getOrderItems()) {
+                        orderItem.setOrders(order);
+                    }
+                }
+            }
+        }
         if (person.getProductRegistrations() != null) {
-            person.getProductRegistrations().forEach(pr->{
-                    pr.setPerson(person);
+            person.getProductRegistrations().forEach(pr -> {
+                pr.setPerson(person);
             });
         }
         return personRepository.save(person);
