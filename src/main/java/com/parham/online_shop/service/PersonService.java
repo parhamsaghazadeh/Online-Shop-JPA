@@ -19,6 +19,11 @@ public class PersonService {
     }
 
     public Person addPerson(Person person) {
+        if (person.getProductRegistrations() != null) {
+            person.getProductRegistrations().forEach(pr->{
+                    pr.setPerson(person);
+            });
+        }
         return personRepository.save(person);
     }
 

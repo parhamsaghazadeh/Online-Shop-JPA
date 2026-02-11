@@ -77,10 +77,10 @@ public class PersonController {
     }
 
     @PostMapping
-    public ResponseEntity<Person> addPerson(@RequestBody Person person) {
+    public ResponseEntity<PersonModel> addPerson(@RequestBody Person person) {
         try {
             Person personAdded = personService.addPerson(person);
-            return ResponseEntity.ok(personAdded);
+            return ResponseEntity.ok(converter.toModelPerson(personAdded));
         } catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
