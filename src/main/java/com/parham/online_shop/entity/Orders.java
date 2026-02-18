@@ -20,8 +20,8 @@ public class Orders {
     private String paymentMethod;
     @Column(name = "payment_date",nullable = false)
     private LocalDateTime paymentDate;
-    @OneToMany(mappedBy = "orders")
+    @OneToMany(mappedBy = "orders", cascade = {CascadeType.PERSIST, CascadeType.REMOVE} , orphanRemoval = true)
     private List<OrderItem> orderItems;
-    @OneToMany(mappedBy = "orderId" )
+    @OneToMany(mappedBy = "orderId" , cascade = {CascadeType.PERSIST, CascadeType.REMOVE} , orphanRemoval = true)
     private List<DisplayOrder> displayOrders;
 }

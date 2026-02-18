@@ -1,5 +1,6 @@
 package com.parham.online_shop.service;
 
+import com.parham.online_shop.entity.DisplayOrder;
 import com.parham.online_shop.entity.OrderItem;
 import com.parham.online_shop.entity.Orders;
 import com.parham.online_shop.entity.Person;
@@ -29,6 +30,12 @@ public class PersonService {
                 if (order.getOrderItems() != null) {
                     for (OrderItem orderItem : order.getOrderItems()) {
                         orderItem.setOrders(order);
+
+                        if (order.getOrderItems() != null) {
+                            for (DisplayOrder displayOrder : order.getDisplayOrders()) {
+                                displayOrder.setOrderId(order);
+                            }
+                        }
                     }
                 }
             }
