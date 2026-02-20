@@ -67,6 +67,15 @@ public class Converter {
         personModel.setPersonId(person.getId());
         personModel.setPhone(person.getPhone());
         personModel.setAge(person.getAge());
+
+        if (person.getAddress() != null) {
+            AddressModel addressModel = new AddressModel();
+            addressModel.setCity(person.getAddress().getCity());
+            addressModel.setStreet(person.getAddress().getStreet());
+            addressModel.setZipcode(person.getAddress().getZipcode());
+            personModel.setAddress(addressModel);
+        }
+
         List<OrderModel> orderModels = person.getOrders()
                 .stream().map(this::toModelOrder).collect(Collectors.toList());
         personModel.setOrdersList(orderModels);
