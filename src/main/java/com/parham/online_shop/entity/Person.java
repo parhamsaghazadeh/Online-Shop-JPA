@@ -36,6 +36,8 @@ public class Person {
     private String phone;
     @Column(table = "person_contact" , name = "age")
     private Long age;
+    @Embedded
+    private Address address;
     @OneToMany(mappedBy = "person" , cascade = {CascadeType.PERSIST, CascadeType.REMOVE} , orphanRemoval = true)
     private List<Orders> orders;
     @OneToMany(mappedBy = "person" , cascade = {CascadeType.PERSIST, CascadeType.REMOVE} , orphanRemoval = true)
