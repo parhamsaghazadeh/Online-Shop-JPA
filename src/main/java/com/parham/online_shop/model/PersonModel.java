@@ -16,6 +16,7 @@ public class PersonModel {
     private User userId;
     private Gender genderId;
     private Role roleId;
+    private AddressModel address;
     private List<OrderModel> ordersList;
     private List<ProductRegisterModel> productRegisterModels;
 
@@ -113,6 +114,14 @@ public class PersonModel {
 
     public void setPersonId(long personId) {
         this.personId = personId;
+    }
+
+    public AddressModel getAddress() {
+        return address;
+    }
+
+    public void setAddress(AddressModel address) {
+        this.address = address;
     }
 }
 
