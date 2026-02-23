@@ -2,9 +2,12 @@ package com.parham.online_shop.service;
 
 import com.parham.online_shop.entity.Orders;
 import com.parham.online_shop.repository.OrdersRepository;
+import com.parham.online_shop.specification.OrderSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -35,5 +38,18 @@ public class OrderService {
 
     public void deleteOrders(Long id) {
         ordersRepository.deleteById(id);
+    }
+
+    public List<Orders> searchOrders(
+            String paymentMethod,
+            String personName,
+            LocalDateTime fromDate,
+            LocalDateTime toDate
+    ) {
+        Specification<Orders> spec = Specification.where(OrderSpecification.hasPaymentMethod(paymentMethod)).
+                and(OrderSpecification.hasPersonName(personName))
+                .and(OrderSpecification.paymentAfterDate(fromDate))
+                .and(OrderSpecification.paymentBeforeDate(toDate));
+        return ordersRepository.findAll(spec);
     }
 }
