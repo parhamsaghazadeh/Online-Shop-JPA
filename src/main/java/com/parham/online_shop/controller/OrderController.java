@@ -6,10 +6,12 @@ import com.parham.online_shop.model.OrderModel;
 import com.parham.online_shop.service.OrderService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -49,6 +51,25 @@ public class OrderController {
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<Orders>> searchOrders(@RequestParam(required = false) String paymentMethod,
+                                     @RequestParam (required = false) String personName,
+                                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                         LocalDateTime formDate,
+                                     @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
+                                         LocalDateTime toDate) {
+        try {
+            orderService.searchOrders(paymentMethod, personName, formDate, toDate);
+            return ResponseEntity.ok(orderService.getAllOrders());
+        }
+        catch (Exception e) {
+            log.error(e.getMessage());
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+
     }
 
     @PostMapping
