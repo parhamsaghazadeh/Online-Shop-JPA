@@ -54,15 +54,18 @@ public class OrderController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<Orders>> searchOrders(@RequestParam(required = false) String paymentMethod,
+    public ResponseEntity<List<OrderModel>> searchOrders(@RequestParam(required = false) String paymentMethod,
                                      @RequestParam (required = false) String personName,
                                      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                                          LocalDateTime formDate,
                                      @RequestParam(required = false) @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME)
                                          LocalDateTime toDate) {
         try {
-            orderService.searchOrders(paymentMethod, personName, formDate, toDate);
-            return ResponseEntity.ok(orderService.getAllOrders());
+            List<Orders> orders = orderService.searchOrders(paymentMethod, personName, formDate, toDate);
+            return ResponseEntity.ok(orders.stream()
+                    .map(converter::toModelOrder)
+                    .toList());
+
         }
         catch (Exception e) {
             log.error(e.getMessage());
