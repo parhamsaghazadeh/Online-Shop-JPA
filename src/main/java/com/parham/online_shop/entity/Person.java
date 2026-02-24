@@ -3,6 +3,7 @@ import jakarta.persistence.*;
 import jakarta.persistence.criteria.Order;
 import lombok.Data;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -21,8 +22,7 @@ public class Person {
     @Column(name = "lastname", length = 50, nullable = false)
     private String lastName;
     @Column(name = "birthday", length = 50, nullable = false)
-    @Temporal(TemporalType.DATE)
-    private Date birthday;
+    private LocalDateTime birthday;
     @ManyToOne
     @JoinColumn(name = "user_id", nullable = false, foreignKey = @ForeignKey(name = "FK_person_user"))
     private User userId;
