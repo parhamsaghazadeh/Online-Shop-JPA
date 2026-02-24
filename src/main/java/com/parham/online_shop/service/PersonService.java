@@ -7,9 +7,12 @@ import com.parham.online_shop.entity.Person;
 import com.parham.online_shop.model.OrderByPersonModel;
 import com.parham.online_shop.model.PersonModel;
 import com.parham.online_shop.repository.PersonRepository;
+import com.parham.online_shop.specification.PersonSpecification;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.jpa.domain.Specification;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Service
@@ -67,5 +70,11 @@ public class PersonService {
     public List<OrderByPersonModel> orderPerson() {
         List<OrderByPersonModel> orderByPersonModels = personRepository.findAllPerson();
         return orderByPersonModels;
+    }
+
+    public List<Person> searchPerson(int age , LocalDateTime birthday ){
+        Specification<Person> spec = Specification.where(PersonSpecification.hasPersonAge(age))
+                .and(PersonSpecification.hasPersonBirthday(birthday));
+        return personRepository.findAll(spec);
     }
 }
