@@ -6,7 +6,7 @@ import org.springframework.data.jpa.domain.Specification;
 import java.time.LocalDateTime;
 
 public class PersonSpecification {
-    public static Specification<Person> hasPersonAge(int age){
+    public static Specification<Person> hasPersonAge(Integer age){
         return (root, query, cb) ->
                 age < 0  ? null : cb.equal(root.get("age") , age);
     }

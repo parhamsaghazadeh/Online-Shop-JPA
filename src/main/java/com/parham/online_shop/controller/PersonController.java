@@ -7,6 +7,7 @@ import com.parham.online_shop.model.PersonModel;
 import com.parham.online_shop.service.PersonService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.format.annotation.DateTimeFormat;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -54,7 +55,8 @@ public class PersonController {
     }
 
     @GetMapping("/search")
-    public ResponseEntity<List<PersonModel>> searchPerson(@RequestParam(required = false) int age , @RequestParam(required = false) LocalDateTime birthday) {
+    public ResponseEntity<List<PersonModel>> searchPerson(@RequestParam(required = false) Integer age , @RequestParam(required = false)
+    @DateTimeFormat(iso = DateTimeFormat.ISO.DATE_TIME) LocalDateTime birthday) {
         try {
             List<Person> person = personService.searchPerson(age , birthday);
             return ResponseEntity.ok(person.stream()

@@ -72,7 +72,7 @@ public class PersonService {
         return orderByPersonModels;
     }
 
-    public List<Person> searchPerson(int age , LocalDateTime birthday ){
+    public List<Person> searchPerson(Integer age , LocalDateTime birthday ){
         Specification<Person> spec = Specification.where(PersonSpecification.hasPersonAge(age))
                 .and(PersonSpecification.hasPersonBirthday(birthday));
         return personRepository.findAll(spec);

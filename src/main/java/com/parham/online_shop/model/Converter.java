@@ -60,7 +60,7 @@ public class Converter {
         personModel.setId(person.getId());
         personModel.setName(person.getName());
         personModel.setLastName(person.getLastName());
-        personModel.setBirthday(formatter.format(person.getBirthday()));
+        personModel.setBirthday(formatterTime.format(person.getBirthday()));
         personModel.setUserId(person.getUserId());
         personModel.setGenderId(person.getGenderId());
         personModel.setRoleId(person.getRoleId());
