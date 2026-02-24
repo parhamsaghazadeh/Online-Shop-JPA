@@ -11,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -46,6 +47,21 @@ public class PersonController {
             PersonModel personModel = converter.toModelPerson(person);
             return ResponseEntity.ok(personModel);
         } catch (Exception e) {
+            log.error(e.getMessage());
+            System.out.println(e);
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
+        }
+    }
+
+    @GetMapping("/search")
+    public ResponseEntity<List<PersonModel>> searchPerson(@RequestParam(required = false) int age , @RequestParam(required = false) LocalDateTime birthday) {
+        try {
+            List<Person> person = personService.searchPerson(age , birthday);
+            return ResponseEntity.ok(person.stream()
+                    .map(converter::toModelPerson)
+                    .toList());
+        }
+        catch (Exception e) {
             log.error(e.getMessage());
             System.out.println(e);
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
